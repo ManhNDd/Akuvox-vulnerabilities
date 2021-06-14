@@ -2,7 +2,7 @@
 
 ## RCE in CFcgiController::HttpSetAccoutDisplayName
 The web service (port 80) on Akuvox C315 115.116.2.613 has a remote code execution. In details, the function CFcgiController::HttpSetAccoutDisplayName (in libservlets.so) uses strcpy unsafely, with the source string fully controlled by the attacker, leading to stack overflow. An un-authenticated attacker with access to the web service can get code execution on the device.
-![image: vulnerable code in CFcgiController::HttpSetAccoutDisplayName](https://github.com/ManhNDd/Akuvox-vulnerabilities/image/RCE-in-HttpSetAccountDisplayName.PNG?raw=true "Vulnerable code in CFcgiController::HttpSetAccoutDisplayName")
+![image: vulnerable code in CFcgiController::HttpSetAccoutDisplayName](https://github.com/ManhNDd/Akuvox-vulnerabilities/blob/main/image/RCE-in-HttpSetAccountDisplayName.PNG?raw=true "Vulnerable code in CFcgiController::HttpSetAccoutDisplayName")
 PoC triggering crash:
 ```Python
 #/usr/bin/python3
