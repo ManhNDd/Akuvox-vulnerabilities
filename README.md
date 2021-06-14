@@ -2,8 +2,7 @@
 
 ## RCE in CFcgiController::HttpSetAccoutDisplayName
 The web service (port 80) on Akuvox C315 115.116.2.613 has a remote code execution. In details, the function CFcgiController::HttpSetAccoutDisplayName (in libservlets.so) uses strcpy unsafely, with the source string fully controlled by the attacker, leading to stack overflow. An un-authenticated attacker with access to the web service can get code execution on the device.
-![image: vulnerable code in CFcgiController::HttpSetAccoutDisplayName](image/RCE-in-HttpSetAccountDisplayName.PNG
-?raw=true "Vulnerable code in CFcgiController::HttpSetAccoutDisplayName")
+![image: vulnerable code in CFcgiController::HttpSetAccoutDisplayName](https://github.com/ManhNDd/Akuvox-vulnerabilities/image/RCE-in-HttpSetAccountDisplayName.PNG?raw=true "Vulnerable code in CFcgiController::HttpSetAccoutDisplayName")
 PoC triggering crash:
 ```Python
 #/usr/bin/python3
@@ -15,8 +14,7 @@ r = requests.get(url)
 print(r.status_code)
 ```
 Crash while debugging in gdb, with PC register going to be ovewritten with arbitrary value:
-![image: crash in gdb with PC controlled](image/RCE-gdb-HttpSetAccoutDisplayName.PNG
-?raw=true "Crash in gdb with PC controlled")
+![image: crash in gdb with PC controlled](https://github.com/ManhNDd/Akuvox-vulnerabilities/image/RCE-gdb-HttpSetAccoutDisplayName.PNG?raw=true "Crash in gdb with PC controlled")
 
 ## RCE in CNetworkBModel::GetIPArray
 The web service (port 80) on Akuvox C315 115.116.2.613 has a remote code execution. In details, in the function CNetworkBModel::GetIPArray (in libservlets.so), the second argument of snprintf is wrongly used as the size of the forth argument, while it should be the maximum size of target buffer:
